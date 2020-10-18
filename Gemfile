@@ -30,7 +30,11 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Users system
 gem 'devise', '~> 4.7.1'
 # For designing stuff
-gem 'bootstrap', '~> 5.0.0.alpha1'
+gem 'bootstrap', '~> 4.2.1'
+# For bootstrap
+gem 'jquery-rails'
+# For simpler templating
+gem 'slim', '~> 4.0.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
