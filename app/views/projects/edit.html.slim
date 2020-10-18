@@ -1,8 +1,9 @@
 = render "shared/container" do
-  p.text-center
-    = link_to @project do
-      = octicon "arrow-left"
-      | Back to project
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Edit project details"
 
   h1.page-title Edit details for this project
 

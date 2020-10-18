@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects, shallow: true do
+    resources :resources
+  end
+
   devise_for :users
 
   authenticated do

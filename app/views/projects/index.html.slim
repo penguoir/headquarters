@@ -1,14 +1,20 @@
-.container.mt-5
-  .row.justify-content-center
-    .col-12.col-md-8
-      h1.display-5.text-center.mb-4 Your projects
+= render "shared/container" do
+  h1.h4.text-center.mb-4.mt-4 Your projects
 
-      .list-group
-        - @projects.each do |project|
-            = link_to project.title, project, class: "list-group-item list-group-item-action font-weight-bold"
+  - @projects.each do |project|
+    = link_to project, class: "text-dark card mb-2" do
+      .card-body.d-flex.flex-column.justify-content-center
+        b= project.title
+      
+  = link_to new_project_path, class: "text-dark bg-light card" do
+    .card-body.d-flex.flex-column.text-center
+      .new-project-icon
+        = octicon "plus", width: 32
+      b Create a new project
 
+/
         = link_to new_project_path, class: "list-group-item"
-          .font-weight-bold
-            = octicon "plus"
-            | Create a new project
+    .font-weight-bold
+      = octicon "plus"
+      | Create a new project
 

@@ -1,0 +1,18 @@
+= render "shared/container" do
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Resources", project_resources_path(@project)
+    - b.item @resource.title
+
+  - if notice
+    .alert.alert-info= notice
+
+
+  .row.justify-content-center.mb-3
+    = link_to edit_resource_path(@project), class: "text-dark" do
+      = octicon "pencil"
+      | Edit resource details
+
+  h1.subpage-title= @resource.title

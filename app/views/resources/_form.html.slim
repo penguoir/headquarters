@@ -1,0 +1,22 @@
+= form_with model: resource, local: true do |f|
+  - if resource.errors.any?
+    .alert.alert-danger
+      h2.h5
+        => pluralize(resource.errors.count, "error")
+        | prohibited this project from being saved:
+
+      ul.mb-0
+        - resource.errors.full_messages.each do |message|
+          li= message
+
+  .form-group
+    = f.label :title, "Resource title"
+    = f.text_field :title, placeholder: "Type the resource title here...", class: "form-control"
+
+  .form-text.text-muted
+    | This resource is in the project
+    em= ' ' + @project.title
+
+  .row.justify-content-end
+    .col-auto
+      = f.submit class: "btn btn-primary"

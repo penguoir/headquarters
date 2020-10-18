@@ -1,0 +1,29 @@
+= render "shared/container"
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Resources"
+
+  - if notice
+    .alert.alert-info= notice
+
+  h1.subpage-title.mb-4
+    | Resources of
+    = ' ' + @project.title
+
+  - unless @resources.any?
+    .alert.alert-info No resources
+
+  .list-group.mb-3
+    = render @resources
+    /
+      = link_to resource, class: "list-group-item list-group-item-action" do
+        b= resource.title
+        .text-muted= resource.user.email
+
+  = link_to new_project_resource_path do
+    .card.bg-light
+      .card-body
+        = octicon "plus"
+        | Add a new resource
+
