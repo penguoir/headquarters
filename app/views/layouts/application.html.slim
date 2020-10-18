@@ -11,5 +11,11 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
+    / Show some development settings for convenience
+    - if Rails.env.development?
+      .bg-info
+        - debug_props.each do |prop,val|
+            b=> prop
+            span= val
 
     = yield
