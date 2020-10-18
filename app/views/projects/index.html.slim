@@ -1,12 +1,11 @@
 .container.mt-5
   .row.justify-content-center
     .col-12.col-md-8
-      h1.font-weight-bold Your projects
+      h1.display-5.text-center.mb-4 Your projects
 
       .list-group
         - @projects.each do |project|
-          .list-group-item
-            p= project.title
+            = link_to project.title, project, class: "list-group-item list-group-item-action font-weight-bold"
 
         = link_to new_project_path, class: "list-group-item"
           .font-weight-bold

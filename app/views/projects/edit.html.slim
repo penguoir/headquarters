@@ -1,7 +1,9 @@
 = render "shared/container" do
   p.text-center
-    = link_to "Back to project", @project
+    = link_to @project do
+      = octicon "arrow-left"
+      | Back to project
 
-  h1.font-weight-bold.text-center.mb-4 Edit details for this project
+  h1.page-title Edit details for this project
 
   = render 'form', project: @project
