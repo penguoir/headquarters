@@ -1,0 +1,11 @@
+= render "shared/container" do
+  - if notice
+    .alert.alert-info= notice
+
+  .row.justify-content-center
+    .col-auto
+      = link_to edit_project_path(@project) do
+        = octicon "pencil"
+        | Edit project details
+
+  h1.font-weight-bold.text-center.mb-4= @project.title
