@@ -1,4 +1,11 @@
-nav.navbar.bg-light
-  .row
-    .col
-      p Home
+nav.bg-light.py-3
+  .container
+    .row.justify-content-center
+      .col-auto
+        = link_to projects_path, class: "nav-item text-dark" do
+          = octicon "home"
+          | Home
+      .col-auto
+        = link_to edit_user_registration_path, class: "nav-item text-dark" do
+          = octicon "person"
+          | Account
