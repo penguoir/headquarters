@@ -1,0 +1,18 @@
+= form_with model: project, local: true do |f| 
+  - if project.errors.any?
+    .alert.alert-danger
+      h2
+        = pluralize(project.errors.count, "error")
+        | prohibited this project from being saved:
+
+      ul
+        - project.errors.full_messages.each do |message|
+          li= message
+
+  .form-group
+    = f.label :title, "Project title"
+    = f.text_field :title, placeholder: "Type the project title here...", class: "form-control"
+
+  .row.justify-content-end
+    .col-auto
+      = f.submit class: "btn btn-primary"
