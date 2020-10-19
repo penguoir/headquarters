@@ -13,6 +13,10 @@
 
   h1.page-title.mt-3= @project.title
 
+  p
+    | This project is not pinned to your dashboard.
+    = button_to "Pin this project", pin_project_path
+
   .card
     .card-header
       .row.justify-content-between.align-items-center

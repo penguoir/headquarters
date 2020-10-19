@@ -3,22 +3,26 @@
   - if notice
     .alert.alert-success= notice
 
-  h1.h4.text-center.mb-4.mt-4 Your projects
+  h1.text-center.mt-4
+    - unless @pinned
+      | All projects
+    - else
+      | Your pinned projects 
+
+  p.text-center
+    - unless @pinned
+      = link_to "Show only your pinned projects", pinned_projects_path, class: "text-secondary"
+    - else
+      = link_to "Show all projects", projects_path, class: "text-secondary"
 
   - @projects.each do |project|
-    = link_to project, class: "text-dark card mb-2" do
+    .card.mb-2
       .card-body.d-flex.flex-column.justify-content-center
-        b= project.title
+        = link_to project do
+          b= project.title
       
   = link_to new_project_path, class: "text-dark bg-light card" do
     .card-body.d-flex.flex-column.text-center
       .new-project-icon
         = octicon "plus", width: 32
       b Create a new project
-
-/
-        = link_to new_project_path, class: "list-group-item"
-    .font-weight-bold
-      = octicon "plus"
-      | Create a new project
-
