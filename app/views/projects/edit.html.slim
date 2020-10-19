@@ -5,6 +5,8 @@
     - b.item @project.title, project_path(@project)
     - b.item "Edit project details"
 
-  h1.page-title Edit details for this project
+  h1.page-title
+    | Edit project details for
+    em= ' ' + @project.title
 
   = render 'form', project: @project
