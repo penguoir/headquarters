@@ -18,8 +18,8 @@
   .card.border-danger.mt-4
     .card-header Danger zone
     .card-body
-      = button_to "Delete this resource", @resource,
-        data: { confirm: "Are you sure you wan to delete '#{@resource.title}'?" },
+      = button_to "Delete this resource...", @resource,
+        data: { confirm: "Are you sure you want to delete '#{@resource.title}'?" },
         method: :delete,
         class: "btn btn-danger"
 

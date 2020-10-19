@@ -1,4 +1,8 @@
 = render "shared/container" do
+  
+  - if notice
+    .alert.alert-success= notice
+
   h1.h4.text-center.mb-4.mt-4 Your projects
 
   - @projects.each do |project|
