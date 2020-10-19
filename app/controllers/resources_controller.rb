@@ -50,7 +50,7 @@ class ResourcesController < ApplicationController
   # DELETE /resources/1.json
   def destroy
     @resource.destroy
-    redirect_to resources_url, notice: 'Resource was successfully destroyed.'
+    redirect_to project_resources_path(@project), notice: 'Resource was destroyed.'
   end
 
   private

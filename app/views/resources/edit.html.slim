@@ -9,8 +9,18 @@
 
 
   h1.page-title
-    | Editing resource
+    | Edit resource details for
     em= ' ' + @resource.title
 
-  = render 'form', resource: @resource
+  / project:nil fixes some bug with nested resources and forms
+  = render 'form', resource: @resource, project: nil
+
+  .card.border-danger.mt-4
+    .card-header Danger zone
+    .card-body
+      = button_to "Delete this resource", @resource,
+        data: { confirm: "Are you sure you wan to delete '#{@resource.title}'?" },
+        method: :delete,
+        class: "btn btn-danger"
+
 

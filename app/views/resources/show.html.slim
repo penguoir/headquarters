@@ -7,12 +7,15 @@
     - b.item @resource.title
 
   - if notice
-    .alert.alert-info= notice
-
+    .alert.alert-success= notice
 
   .row.justify-content-center.mb-3
-    = link_to edit_resource_path(@project), class: "text-dark" do
+    = link_to edit_resource_path(@resource), class: "text-dark" do
       = octicon "pencil"
       | Edit resource details
 
   h1.subpage-title= @resource.title
+
+  p.text-muted.text-center
+    | Uploaded by
+    = ' ' + @resource.user.email
