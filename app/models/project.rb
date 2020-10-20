@@ -7,4 +7,8 @@ class Project < ApplicationRecord
   def self.pinned_by(user)
     joins(:pins).where(pins: { user: user, pinned: true })
   end
+
+  def pinned_by?(user)
+    pins.find_by(user: user)[:pinned]
+  end
 end

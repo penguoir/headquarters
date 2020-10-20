@@ -8,13 +8,13 @@ class ProjectsController < ApplicationController
   def pinned
     @projects = Project.pinned_by(current_user)
 
-    # TODO: find a better way to conditionally only render pinned
+    # TODO: find a better way to conditionally filter by pinned
     @pinned = true
+
     render "index"
   end
 
   def show
-    session[:return_to] ||= request.referer
   end
 
   def new

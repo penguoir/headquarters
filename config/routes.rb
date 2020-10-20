@@ -6,6 +6,11 @@ Rails.application.routes.draw do
       get 'pinned'
     end
 
+    member do
+      # /project/1/pin --> pins#pin
+      post 'pin', to: 'pins#pin'
+    end
+
     resources :resources
   end
 
