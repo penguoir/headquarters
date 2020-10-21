@@ -37,6 +37,8 @@ gem 'jquery-rails'
 gem 'slim', '~> 4.0.1'
 # For icons
 gem 'octicons_helper', '~> 10.0'
+# Track user activity
+gem 'public_activity', '~> 1.6.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

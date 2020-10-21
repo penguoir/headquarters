@@ -15,6 +15,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @activities = @project.important_activities
   end
 
   def new

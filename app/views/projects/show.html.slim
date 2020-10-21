@@ -40,3 +40,10 @@
       - else
         .list-group-item.text-center.text-secondary.font-italic
           | There are no resources in this project
+
+  
+  .card.mt-3
+    .card-body
+      .card-title Recent project activity
+      = render_activities @activities, layout: :activity
+

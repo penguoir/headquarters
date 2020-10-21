@@ -1,0 +1,11 @@
+.row.justify-content-between
+
+  .col-auto
+    span.font-weight-bold
+      - if activity.owner
+        = activity.owner.display_name + ' '
+    == yield
+    
+  .col-auto.text-secondary
+    => time_ago_in_words(activity.created_at)
+    | ago
