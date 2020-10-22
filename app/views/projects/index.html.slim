@@ -16,11 +16,19 @@
     - else
       = link_to "Show all projects", projects_path, class: "text-secondary"
 
+
+  p.text-center
+    = link_to new_project_path, class: "btn btn-success btn-lg" do
+      = octicon "plus"
+      | Create a new project
+
   - @projects.each do |project|
     .card.mb-2
       .card-body.d-flex.flex-column.justify-content-center
-        = link_to project do
-          b= project.title
+        = link_to project, class: "text-body" do
+          b.text-body= project.title
+          - if project.brief.body?
+            p.mb-0.text-secondary== project.brief.to_plain_text.truncate(200)
       
   = link_to new_project_path, class: "text-dark bg-light card" do
     .card-body.d-flex.flex-column.text-center

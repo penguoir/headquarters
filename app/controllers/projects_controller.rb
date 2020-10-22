@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
-    @projects = Project.all
+    @projects = Project.all.with_rich_text_brief
   end
 
   def pinned
@@ -61,6 +61,7 @@ class ProjectsController < ApplicationController
   def project_params
     input_params = params.require(:project).permit(
       :title,
+      :brief,
       :pins_attributes => [
         :id,
         :pinned

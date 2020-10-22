@@ -2,6 +2,7 @@ class Project < ApplicationRecord
   include PublicActivity::Model
   tracked :owner => -> (controller, model) { controller.current_user }
 
+  has_rich_text :brief
   has_many :resources, dependent: :destroy
   has_many :pins, dependent: :destroy
 
@@ -22,3 +23,4 @@ class Project < ApplicationRecord
       .limit(15)
   end
 end
+

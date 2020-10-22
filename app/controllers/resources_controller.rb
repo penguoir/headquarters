@@ -2,32 +2,18 @@ class ResourcesController < ApplicationController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_action :set_project
 
-  # GET /resources
-  # GET /resources.json
-  def index
-    @resources = Resource.all
-  end
-
-  # GET /resources/1
-  # GET /resources/1.json
   def show
   end
 
-  # GET /resources/new
   def new
-    @resource = @project.resources.new
+    @resource = Resource.new(user: current_user, project: @project)
   end
 
-  # GET /resources/1/edit
   def edit
   end
 
-  # POST /resources
-  # POST /resources.json
   def create
     @resource = Resource.new(resource_params)
-    @resource.user = current_user
-    @resource.project = @project
 
     if @resource.save
       redirect_to @resource, notice: 'Resource was successfully created.'
@@ -36,8 +22,6 @@ class ResourcesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /resources/1
-  # PATCH/PUT /resources/1.json
   def update
     if @resource.update(resource_params)
       redirect_to @resource, notice: 'Resource was successfully updated.'
@@ -46,8 +30,6 @@ class ResourcesController < ApplicationController
     end
   end
 
-  # DELETE /resources/1
-  # DELETE /resources/1.json
   def destroy
     @resource.destroy
     redirect_to project_resources_path(@project), notice: 'Resource was destroyed.'
@@ -65,6 +47,11 @@ class ResourcesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def resource_params
-    params.require(:resource).permit(:title, :user_id, :project_id)
+    params.require(:resource).permit(
+      :title, :user_id, :project_id
+    ).merge(
+      :project_id => @project.id,
+      :user_id => current_user.id
+    )
   end
 end

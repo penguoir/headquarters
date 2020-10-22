@@ -20,6 +20,11 @@
         = octicon "pin"
         | Pin the project
 
+  - if @project.brief.body?
+    .card.mb-3
+      .card-header Project brief
+      .card-body== @project.brief
+
   .card
     .card-header
       .row.justify-content-between.align-items-center
@@ -33,9 +38,6 @@
     ul.list-group.list-group-flush
       - if @project.resources.any?
         = render @project.resources
-
-        = link_to project_resources_path(@project), class: "list-group-item" do
-          | View all project resources
 
       - else
         .list-group-item.text-center.text-secondary.font-italic

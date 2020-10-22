@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       post 'pin', to: 'pins#pin'
     end
 
-    resources :resources
+    resources :resources, except: :index
   end
 
   authenticated do
