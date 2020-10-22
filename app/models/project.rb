@@ -16,6 +16,14 @@ class Project < ApplicationRecord
     pins.find_by(user: user)[:pinned]
   end
 
+  def last_activity
+    PublicActivity::Activity.where(recipient: self)
+      .or(PublicActivity::Activity.where(trackable: self))
+      .order(created_at: :desc)
+      .limit(1)
+      .first
+  end
+
   def important_activities
     PublicActivity::Activity.where( recipient: self)
       .or(PublicActivity::Activity.where( trackable: self))

@@ -5,6 +5,11 @@
     - b.item @project.title, project_path(@project)
     - b.item "Edit project details"
 
+  p.text-center
+    = link_to project_path do
+      = octicon "arrow-left"
+      | Back to project
+
   h1.page-title
     | Edit project details for
     em= ' ' + @project.title

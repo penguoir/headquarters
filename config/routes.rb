@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       # /project/1/pin --> pins#pin
       post 'pin', to: 'pins#pin'
+      delete 'pin', to: 'pins#unpin'
     end
 
     resources :resources, except: :index
