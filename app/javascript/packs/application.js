@@ -5,6 +5,10 @@
 
 import 'bootstrap'
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
