@@ -1,7 +1,13 @@
 = render "shared/container" do
-  h1.font-weight-bold.text-center.h2.my-5
-    | Profile of 
-    = mail_to @user.email
+  h1.font-weight-bold.text-center.h2.mt-5
+    = @user.display_name.possessive
+    |  profile page
+
+  p.text-center
+    = mail_to @user.email, class: "btn btn-link" do
+      = octicon "mail"
+      | Send an email to 
+      = @user.display_name
 
   h2.subpage-title.mb-4.mt-5
     span

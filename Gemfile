@@ -39,6 +39,8 @@ gem 'slim', '~> 4.0.1'
 gem 'octicons_helper', '~> 10.0'
 # Track user activity
 gem 'public_activity', '~> 1.6.4'
+# Adds String#possesive
+gem "possessive" 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

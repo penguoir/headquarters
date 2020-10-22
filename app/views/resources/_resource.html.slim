@@ -1,7 +1,8 @@
 .list-group-item.list-group-item-action
   .row.justify-content-between
-    .col-auto
+    .col-9
       p.mb-0= link_to resource.title, resource, class: "font-weight-bold text-body"
+      p.mb-0= resource.content.to_plain_text.truncate(100)
 
       - unless current_page? user_path
         p.mb-0= link_to resource.user.email, resource.user, class: "text-muted"
@@ -11,7 +12,7 @@
           | In project: 
           = link_to resource.project.title, resource.project
 
-    .col-auto
+    .col-3.text-right
       p.text-secondary
         | last updated
         = ' ' + time_ago_in_words(resource.project.updated_at) + ' '

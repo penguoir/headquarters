@@ -48,7 +48,7 @@ class ResourcesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def resource_params
     params.require(:resource).permit(
-      :title, :user_id, :project_id
+      :title, :content, :user_id, :project_id
     ).merge(
       :project_id => @project.id,
       :user_id => current_user.id
