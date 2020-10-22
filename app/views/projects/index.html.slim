@@ -22,13 +22,7 @@
       = octicon "plus"
       | Create a new project
 
-  - @projects.each do |project|
-    .card.mb-2
-      .card-body.d-flex.flex-column.justify-content-center
-        = link_to project, class: "text-body" do
-          b.text-body= project.title
-          - if project.brief.body?
-            p.mb-0.text-secondary== project.brief.to_plain_text.truncate(200)
+  = render @projects
       
   = link_to new_project_path, class: "text-dark bg-light card" do
     .card-body.d-flex.flex-column.text-center

@@ -1,3 +1,20 @@
-= link_to resource, class: "list-group-item list-group-item-action" do
-  b= resource.title
-  .text-muted= resource.user.email
+.list-group-item.list-group-item-action
+  .row.justify-content-between
+    .col-auto
+      p.mb-0= link_to resource.title, resource, class: "font-weight-bold text-body"
+
+      - unless current_page? user_path
+        p.mb-0= link_to resource.user.email, resource.user, class: "text-muted"
+
+      - unless current_page? project_path
+        p.mb-0
+          | In project: 
+          = link_to resource.project.title, resource.project
+
+    .col-auto
+      p.text-secondary
+        | last updated
+        = ' ' + time_ago_in_words(resource.project.updated_at) + ' '
+        | ago
+
+

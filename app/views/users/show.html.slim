@@ -1,0 +1,23 @@
+= render "shared/container" do
+  h1.font-weight-bold.text-center.h2.my-5
+    | Profile of 
+    = mail_to @user.email
+
+  h2.subpage-title.mb-4.mt-5
+    span
+      span.mr-1= octicon "pin", width: 20
+      | Pinned projects
+
+  .list-group
+    = render @user.pinned_projects
+  
+  h2.subpage-title.mb-4.mt-5
+    | Recent resources
+
+  .list-group
+    = render @resources
+
+  h2.subpage-title.mb-4.mt-5
+    | This week's activity
+
+  = render_activities @activities, layout: :activity

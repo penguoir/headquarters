@@ -8,4 +8,9 @@ class User < ApplicationRecord
   def display_name
     self.email.split('@', 2).first.capitalize
   end
+
+  def pinned_projects
+    pins.map { |p| p.project }
+  end
 end
+
