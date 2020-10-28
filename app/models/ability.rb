@@ -22,17 +22,22 @@ class Ability
   #   
   # Read more here: https://github.com/CanCanCommunity/cancancan/blob/develop/docs/Defining-Abilities.md
   def initialize(user)
-    return unless user.present? and user.student?
-    # Students can read and pin projects
-    can [:read, :pinned], Project
-    can :manage, Pin, user: user
+    return unless user.present?
 
-    # Stduents can read resources
-    can :read, Resource
-    # Stduents can manage their own resources
-    can :manage, Resource, user: user
+    if user.student? or user.teacher?
+      # Students and teachers can read and pin projects
+      can [:read, :pinned], Project
+      can :manage, Pin, user: user
 
-    return unless user.teacher?
-    can :manage, :all
+      # Stduent and teachers can read resources
+      can :read, Resource
+      # Stduent and teachers can manage their own resources
+      can :manage, Resource, user: user
+    end
+
+    if user.teacher?
+      # Teachers can do anything they want
+      can :manage, :all
+    end
   end
 end
