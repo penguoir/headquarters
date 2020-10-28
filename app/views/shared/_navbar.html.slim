@@ -5,7 +5,24 @@ nav.bg-light.py-3
         = link_to projects_path, class: "nav-item text-dark" do
           = octicon "home"
           | Home
+
       .col-auto
-        = link_to edit_user_registration_path, class: "nav-item text-dark" do
+        = link_to "#", {\
+            :id => "account",
+            :class => "nav-item text-dark",
+            :type => "button",
+            :data => { :toggle => "dropdown" },
+            :aria_haspopup => "true",
+            :aria_expanded => "false",
+          }
           = octicon "person"
           | Account
+
+        .dropdown-menu[aria-labelledby="edit_project_details" style="max-width:
+          500px"]
+          = link_to user_path(current_user), class: "dropdown-item" do
+            = octicon "smiley"
+            | Profile (pinned projects, resources, activity) 
+          = link_to edit_user_registration_path, class: "dropdown-item" do
+            = octicon "settings", width: 16
+            | Settings (change your email, password)
