@@ -1,0 +1,13 @@
+= render "shared/container" do
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Resources"
+    - b.item "Add a new resource"
+
+  h1.page-title
+    | Add a new resource to
+    em= ' ' + @project.title
+
+  = render 'form', project: @project, resource: @resource

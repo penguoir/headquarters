@@ -1,4 +1,9 @@
 = render "shared/container" do
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item "New project"
+
   h1.page-title Enter details for the new project
 
   = render "form", project: @project

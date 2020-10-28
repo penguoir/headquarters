@@ -13,6 +13,15 @@
     = f.label :title, "Project title"
     = f.text_field :title, placeholder: "Type the project title here...", class: "form-control"
 
+  .form-group
+    = f.label :brief, "A brief for the project"
+    = f.rich_text_area :brief
+
+  = f.fields_for :pins do |pins_f|
+    .form-check
+      = pins_f.check_box :pinned, class: "form-check-input"
+      = pins_f.label :pinned, "Add this project to your pinned projects?", class: "form-check-label"
+
   .row.justify-content-end
     .col-auto
       = f.submit class: "btn btn-primary"

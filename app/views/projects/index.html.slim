@@ -1,14 +1,31 @@
-.container.mt-5
-  .row.justify-content-center
-    .col-12.col-md-8
-      h1.display-5.text-center.mb-4 Your projects
+= render "shared/container" do
+  
+  - if notice
+    .alert.alert-success= notice
 
-      .list-group
-        - @projects.each do |project|
-            = link_to project.title, project, class: "list-group-item list-group-item-action font-weight-bold"
+  h1.text-center.mt-4
+    - unless @pinned
+      | All projects
+    - else
+      = octicon "pin", width: 32
+      | Your pinned projects 
 
-        = link_to new_project_path, class: "list-group-item"
-          .font-weight-bold
-            = octicon "plus"
-            | Create a new project
+  p.text-center
+    - unless @pinned
+      = link_to "Show only your pinned projects", pinned_projects_path, class: "text-secondary"
+    - else
+      = link_to "Show all projects", projects_path, class: "text-secondary"
 
+
+  p.text-center
+    = link_to new_project_path, class: "btn btn-success btn-lg" do
+      = octicon "plus"
+      | Create a new project
+
+  = render @projects
+      
+  = link_to new_project_path, class: "text-dark bg-light card" do
+    .card-body.d-flex.flex-column.text-center
+      .new-project-icon
+        = octicon "plus", width: 32
+      b Create a new project

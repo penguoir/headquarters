@@ -1,0 +1,29 @@
+= render "shared/container" do
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Resources"
+    - b.item @resource.title
+
+  - if notice
+    .alert.alert-success= notice
+
+  .row.justify-content-center.mb-3
+    = link_to edit_resource_path(@resource), class: "text-dark" do
+      = octicon "pencil"
+      | Edit resource details
+
+  h1.subpage-title= @resource.title
+
+  p.text-muted.text-center
+    | Added to project by
+    = ' ' + @resource.user.email
+
+  .card.mt-3
+    .card-body
+      == @resource.content
+
+      - unless @resource.content.body?
+        i No content
+  

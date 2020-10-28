@@ -1,53 +1,47 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
-  # GET /projects
-  # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.all.with_rich_text_brief
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
+  def pinned
+    @projects = Project.pinned_by(current_user)
+
+    # TODO: find a better way to conditionally filter by pinned
+    @pinned = true
+
+    render "index"
+  end
+
   def show
+    @activities = @project.important_activities
   end
 
-  # GET /projects/new
   def new
     @project = Project.new
+    @project.pins.build(user: current_user)
   end
 
-  # GET /projects/1/edit
   def edit
   end
 
-  # POST /projects
-  # POST /projects.json
   def create
     @project = Project.new(project_params)
 
-    respond_to do |format|
-      if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.save
+      redirect_to @project, notice: 'Project was successfully created.'
+    else
+      render :show, status: :created, location: @project
     end
   end
 
-  # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.update(project_params)
+      redirect_to @project, notice: 'Project was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -55,20 +49,28 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to projects_url, notice: 'Project was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def project_params
-      params.require(:project).permit(:title)
-    end
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def project_params
+    input_params = params.require(:project).permit(
+      :title,
+      :brief,
+      :pins_attributes => [
+        :id,
+        :pinned
+      ]
+    )
+
+    input_params[:pins_attributes]["0"][:user_id] = current_user.id
+
+    input_params
+  end
 end

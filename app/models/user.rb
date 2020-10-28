@@ -1,6 +1,18 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  enum role: [:student, :teacher, :admin]
+
+  has_many :resources
+  has_many :pins
+
+  def display_name
+    self.email.split('@', 2).first.capitalize
+  end
+
+  def pinned_projects
+    pins.map { |p| p.project }
+  end
 end
+

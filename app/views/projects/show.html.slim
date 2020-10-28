@@ -1,11 +1,73 @@
 = render "shared/container" do
   - if notice
-    .alert.alert-info= notice
+    .alert.alert-success= notice
 
-  .row.justify-content-center
-    .col-auto
-      = link_to edit_project_path(@project) do
-        = octicon "pencil"
-        | Edit project details
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title
 
-  h1.page-title.mt-3= @project.title
+  .row.justify-content-end
+    .col-4.text-right
+      .dropdown
+        button.btn#edit_project_details[type="button" data-toggle="dropdown", aria-haspopup="true" aria-expanded="false" href="#"]
+          = octicon "three-bars"
+
+        .dropdown-menu[aria-labelledby="edit_project_details" style="max-width: 250px"]
+          / Edit project
+          - if can? :edit, @project
+            = link_to edit_project_path, class: "dropdown-item" do
+              = octicon "pencil"
+              | Edit title, brief
+
+          / Pin/unpin project
+          - if @project.pinned_by?(current_user)
+            = link_to pin_project_path, class: "dropdown-item", method: :delete do
+              = octicon "pin"
+              | Unpin the project
+          - else
+            = link_to pin_project_path, class: "dropdown-item", method: :post do
+              = octicon "pin"
+              | Pin the project
+
+          p.text-muted.p-4.mb-0
+            | Last edit was made
+            = ' ' + time_ago_in_words(@project.last_activity.created_at) + ' '
+            | ago.
+
+  h1.page-title= @project.title
+
+  - unless @project.pinned_by?(current_user)
+    p.text-secondary.text-center
+      | This project isn't in your dashboard. 
+      = link_to pin_project_path, method: :post do
+        = octicon "pin"
+        | Pin the project
+
+  - if @project.brief.body?
+    .card.mb-3
+      .card-header Project brief
+      .card-body== @project.brief
+
+  .card
+    .card-header
+      .row.justify-content-between.align-items-center
+        .col.font-weight-bold
+          | Resources
+        .col-auto
+          = link_to new_project_resource_path(@project), class: "text-primary" do
+            = octicon "plus"
+            | Add a resource
+
+    ul.list-group.list-group-flush
+      - if @project.resources.any?
+        = render @project.resources
+
+      - else
+        .list-group-item.text-center.text-secondary.font-italic
+          | There are no resources in this project
+  
+  .card.mt-3
+    .card-body
+      .card-title Recent project activity
+      = render_activities @activities, layout: :activity
+
