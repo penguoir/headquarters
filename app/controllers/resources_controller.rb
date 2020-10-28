@@ -2,6 +2,8 @@ class ResourcesController < ApplicationController
   before_action :set_resource, only: [:show, :edit, :update, :destroy]
   before_action :set_project
 
+  load_and_authorize_resource
+
   def show
   end
 

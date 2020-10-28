@@ -13,7 +13,7 @@ class Project < ApplicationRecord
   end
 
   def pinned_by?(user)
-    pins.find_by(user: user)[:pinned]
+    pins.where(user: user, pinned: true).any?
   end
 
   def last_activity

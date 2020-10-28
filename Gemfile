@@ -39,6 +39,8 @@ gem 'slim', '~> 4.0.1'
 gem 'octicons_helper', '~> 10.0'
 # Track user activity
 gem 'public_activity', '~> 1.6.4'
+# Authorization
+gem 'cancancan'
 # Adds String#possesive
 gem "possessive" 
 

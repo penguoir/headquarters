@@ -1,7 +1,8 @@
 module ApplicationHelper
   def debug_props
     {
-      :current_user => current_user ? current_user.email : 'nil'
+      :current_user => current_user ? current_user.email : 'nil',
+      :role => current_user ? current_user.role : 'nil'
     }
   end
 
