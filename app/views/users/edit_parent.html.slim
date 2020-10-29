@@ -1,0 +1,26 @@
+= render "shared/container"
+  h1.page-title.mt-5 Edit parent's details
+
+  p.text-center
+    = link_to "Edit account settings", edit_user_registration_path
+
+  = form_with model: @user, url: users_edit_parent_path do |f|
+    - if @user.errors.any?
+      .alert.alert-danger
+        h2
+          = pluralize(@user.errors.count, "error")
+          | prohibited this project from being saved:
+        ul
+          - @user.errors.full_messages.each do |message|
+            li= message
+
+    .form-group
+      = f.label :parent_email
+      = f.email_field :parent_email, class: "form-control"
+
+      p.form-text.text-muted
+        | We'll send emails here once a week
+
+    .form-group.row.justify-content-center
+      .col-4
+        = f.submit "Save changes", class: "btn btn-primary btn-block btn-lg"

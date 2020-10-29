@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
+
   resources :users, only: :show
+  get 'users/edit/parent', to: 'users#edit_parent'
+  patch 'users/edit/parent', to: 'users#update_parent'
 
   resources :projects, shallow: true do
     collection do
