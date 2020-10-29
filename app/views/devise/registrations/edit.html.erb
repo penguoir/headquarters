@@ -1,11 +1,4 @@
 <%= render "shared/container" do %>
-
-  <% if flash.notice.present? %>
-    <div class="alert alert-success">
-      <%= flash.notice %>
-    </div>
-  <% end %>
-
   <h2 class="page-title mt-5">
     Account settings
   </h2>
@@ -50,9 +43,9 @@
       </p>
     </div>
 
-    <div class="row justify-content-end">
-      <div class="col-auto">
-        <%= f.submit "Update", class: "btn btn-primary" %>
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <%= f.submit "Save changes to settings", class: "btn btn-primary btn-block btn-lg" %>
       </div>
     </div>
   <% end %>

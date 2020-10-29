@@ -1,0 +1,29 @@
+Weekly report for <%= @user.display_name %>
+<%= "=" * ('Weekly report for '.length + @user.display_name.length) %>
+
+This report is for the week starting on <%= Date.today.beginning_of_week.strftime '%d/%m/%Y' %>.
+
+
+Pinned projects (<%= @user.pinned_projects.length %>)
+<%= "-" * (18 + @user.pinned_projects.size.digits.count) %>
+
+These are projects that the student has pinned to their dashboard. They're
+probably spending most of their time on some of these.
+
+<%- @user.pinned_projects.each do |project| %>
+  * <%= project.title %>
+<% end %>
+
+
+Resources added in the last week (<%= @resources.size %>)
+<%= "-" * (35 + @resources.size.digits.count) %>
+
+Resources are pieces of knowledge the student has shared with their class.
+These have been added in the past week.
+
+<%- @resources.each do |resource| %>
+  * <%= resource.title %>
+<% end %>
+
+
+Happy learning!

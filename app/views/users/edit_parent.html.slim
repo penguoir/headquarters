@@ -2,7 +2,8 @@
   h1.page-title.mt-5 Edit parent's details
 
   p.text-center
-    = link_to "Edit account settings", edit_user_registration_path
+    = link_to edit_user_registration_path
+      | &larr; Back to account settings
 
   = form_with model: @user, url: users_edit_parent_path do |f|
     - if @user.errors.any?
@@ -19,7 +20,8 @@
       = f.email_field :parent_email, class: "form-control"
 
       p.form-text.text-muted
-        | We'll send emails here once a week
+        | We'll send emails here once a week. The last report was sent
+        = ' ' + time_ago_in_words(@last_report) + ' ago.'
 
     .form-group.row.justify-content-center
       .col-4

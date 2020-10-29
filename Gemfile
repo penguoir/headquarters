@@ -43,6 +43,8 @@ gem 'public_activity', '~> 1.6.4'
 gem 'cancancan'
 # Adds String#possesive
 gem "possessive" 
+# Cron jobs
+gem "whenever"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

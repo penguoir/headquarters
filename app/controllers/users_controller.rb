@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def edit_parent
     @user = current_user
+    @last_report = Date.today.prev_occurring(:friday).change(hour: 16)
   end
 
   def update_parent
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
 
     if @user.update(ps)
       redirect_to @user, notice: "Parent's details changed."
+      ReportMailer.with(user: @user).welcome_mail.deliver_later
     else
       render :edit_parent
     end
