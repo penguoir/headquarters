@@ -34,7 +34,7 @@ class ResourcesController < ApplicationController
 
   def destroy
     @resource.destroy
-    redirect_to project_resources_path(@project), notice: 'Resource was destroyed.'
+    redirect_to @project, notice: 'Resource was destroyed.'
   end
 
   private

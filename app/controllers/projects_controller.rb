@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   end
 
   def pinned
-    @projects = Project.pinned_by(current_user)
+    @projects = current_user.pinned_projects
 
     # TODO: find a better way to conditionally filter by pinned
     @pinned = true

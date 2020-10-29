@@ -5,7 +5,9 @@
       p.mb-0= resource.content.to_plain_text.truncate(100)
 
       - unless current_page? user_path
-        p.mb-0= link_to resource.user.email, resource.user, class: "text-muted"
+        p.mb-0.text-muted
+          | Uploaded by 
+          = link_to resource.user.display_name, resource.user, class: "text-dark"
 
       - unless current_page? project_path
         p.mb-0

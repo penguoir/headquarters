@@ -12,7 +12,7 @@ class User < ApplicationRecord
   end
 
   def pinned_projects
-    pins.map { |p| p.project }
+    Project.pinned_by(self)
   end
 end
 
