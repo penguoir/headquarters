@@ -18,11 +18,16 @@ nav.bg-light.py-3
           = octicon "person"
           | Account
 
-        .dropdown-menu[aria-labelledby="edit_project_details" style="max-width:
-          500px"]
-          = link_to user_path(current_user), class: "dropdown-item" do
-            = octicon "smiley"
-            | Profile (pinned projects, resources, activity) 
-          = link_to edit_user_registration_path, class: "dropdown-item" do
-            = octicon "settings", width: 16
-            | Settings (email, password, parent's email)
+        - if current_user
+          .dropdown-menu[aria-labelledby="edit_project_details" style="max-width: 500px"]
+            = link_to user_path(current_user), class: "dropdown-item" do
+              = octicon "smiley"
+              | Profile (pinned projects, resources, activity) 
+            = link_to edit_user_registration_path, class: "dropdown-item" do
+              = octicon "settings", width: 16
+              | Settings (email, password, parent's email)
+
+            = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
+              = octicon "sign-out", width: 16
+              | Sign out
+
