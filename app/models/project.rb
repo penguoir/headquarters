@@ -5,6 +5,7 @@ class Project < ApplicationRecord
   has_rich_text :brief
   has_many :resources, dependent: :destroy
   has_many :pins, dependent: :destroy
+  has_many :chats, dependent: :destroy
 
   accepts_nested_attributes_for :pins
 

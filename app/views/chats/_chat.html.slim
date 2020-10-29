@@ -1,0 +1,8 @@
+.chat.container-fluid.px-2.py-2.rounded
+  .row.justify-content-between
+    .col-auto
+      b=> chat.user.display_name
+      span.ago.text-muted= time_ago_in_words(chat.created_at) + ' ago'
+
+  .row
+    .col-12= chat.body

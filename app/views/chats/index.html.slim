@@ -1,0 +1,27 @@
+= render "shared/container"
+  
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Chats"
+
+  h1.page-title Project chat
+
+  .d-none#channel data-id=@project.id
+
+  = form_with model: @chat do |f|
+    .row
+      .col-10.pr-1
+        = f.label :body, "Send a new chat", class: "d-none"
+        = f.text_field :body, class: "form-control", placeholder: "Type in your message here&hellip;".html_safe
+      .col-2.pl-1
+        = f.button class: "btn btn-primary btn-block"
+          = octicon "paper-airplane"
+          | Send
+
+  #chats.mt-4
+    = render @chats
+
+  p.border-top.p-3.text-center.mt-3
+    => [@project.chats.size - 25, 0].max
+    | other chats aren't shown
