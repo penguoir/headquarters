@@ -1,6 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    puts params
+    return unless params[:project_id].present?
+
     project = Project.find(params[:project_id])
     stream_for project
   end
