@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       post 'pin', to: 'pins#pin'
       delete 'pin', to: 'pins#unpin'
 
+      get 'students', to: 'projects#students'
+
       resources :chats
     end
 

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :students]
   load_and_authorize_resource
 
   def index
@@ -16,6 +16,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @activities = @project.important_activities
+  end
+
+  def students
+    @students = @project.students
     @activities = @project.important_activities
   end
 

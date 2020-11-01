@@ -13,6 +13,11 @@ class Project < ApplicationRecord
     joins(:pins).where(pins: { user: user, pinned: true })
   end
 
+  # All students who have pinned this project
+  def students
+    User.includes(:pins).where(pins: { project: self, pinned: true })
+  end
+
   def pinned_by?(user)
     pins.where(user: user, pinned: true).any?
   end
@@ -21,7 +26,6 @@ class Project < ApplicationRecord
     PublicActivity::Activity.where(recipient: self)
       .or(PublicActivity::Activity.where(trackable: self))
       .order(created_at: :desc)
-      .limit(1)
       .first
   end
 

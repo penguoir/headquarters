@@ -1,0 +1,28 @@
+= render "shared/container"
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path
+    - b.item "Students"
+
+  h1.subpage-title Students who pinned this project
+
+  .list-group.mt-5
+    - @students.each do |student|
+      .list-group-item-action.list-group-item.cursor
+        .row.justify-content-between.mb-2
+          .col-auto
+            p.mb-0
+              = link_to student.display_name, student, class: "font-weight-bold text-body"
+              = " (#{@activities.where(owner: student).size} recent activities)"
+          .col-auto
+            | pinned this project 
+            => time_ago_in_words(student.pins.find_by(project: @project).created_at)
+            | ago
+
+        a.text-body data-toggle="collapse" href="#student_#{student.id}"
+          = octicon "chevron-down"
+          | Show activities
+        .collapse id="student_#{student.id}"
+          = render_activities @activities.where(owner: student), layout: :activity
+
