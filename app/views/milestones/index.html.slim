@@ -1,0 +1,16 @@
+= render "shared/container"
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Milestones"
+
+  h1.page-title Milestones for #{@project.title}
+
+  .row.justify-content-center: .col-md-6.col-12
+    = link_to new_project_milestone_path, class: "btn btn-light btn-block mb-2"
+      = octicon "plus"
+      | Add a new milestone
+
+  .container.mt-4
+    = render @milestones

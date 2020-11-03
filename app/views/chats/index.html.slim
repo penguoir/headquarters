@@ -9,7 +9,7 @@
 
   .d-none#channel data-id=@project.id
 
-  = form_with model: @chat do |f|
+  = form_with model: [@project, @chat] do |f|
     .row
       .col-10.pr-1
         = f.label :body, "Send a new chat", class: "d-none"

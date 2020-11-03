@@ -1,16 +1,20 @@
 class ChatsController < ApplicationController
   before_action :set_project
 
+  load_and_authorize_resource
+
   def index
-    @chat = Chat.new
     @chats = Chat.where(project: @project).recent.limit(25)
+
+    @chat = Chat.new
   end
 
   def create
-    @chat = Chat.new
-    @chat.user = current_user
-    @chat.project = @project
-    @chat.body = params[:chat][:body]
+    @chat = Chat.new do |c|
+      c.user = current_user
+      c.project = @project
+      c.body = params[:chat][:body]
+    end
 
     if @chat.save
       ChatChannel.broadcast_to(@project, {
@@ -23,11 +27,11 @@ class ChatsController < ApplicationController
 
   private
 
-  def set_project
-    @project = Project.find(params[:id])
-  end
-
   def chat_params
     params.require(:chat).permit(:body)
+  end
+
+  def set_project
+    @project = Project.find(params[:project_id])
   end
 end

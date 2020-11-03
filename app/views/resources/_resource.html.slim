@@ -4,18 +4,19 @@
       p.mb-0= link_to resource.title, resource, class: "font-weight-bold text-body"
       p.mb-0= resource.content.to_plain_text.truncate(100)
 
-      - unless current_page? user_path
+      - unless current_page? '/users/*'
         p.mb-0.text-muted
           | Uploaded by 
           = link_to resource.user.display_name, resource.user, class: "text-dark"
 
-      - unless current_page? project_path
+      - unless controller_name == 'projects' and action_name == 'show'
         p.mb-0
           | In project: 
           = link_to resource.project.title, resource.project
 
-    .col-3.text-right
+    .col-auto.text-right
       p.text-secondary
+        = octicon "clock"
         | last updated
         = ' ' + time_ago_in_words(resource.project.updated_at) + ' '
         | ago

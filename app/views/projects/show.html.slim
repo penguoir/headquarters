@@ -61,47 +61,59 @@
                 | Edit project details
       .card-body== @project.brief
 
-  .card.mb-3
-    .card-header
-      .row.justify-content-between.align-items-center
-        .col.font-weight-bold
-          | Resources
-        .col-auto
-          = link_to new_project_resource_path(@project), class: "text-primary" do
-            = octicon "plus"
-            | Add a resource&hellip;
+.container: .row
+  .col-4: .card.mb-3
+    .card-header: .row.justify-content-between.align-items-center
+      .col.font-weight-bold
+        = octicon "bookmark"
+        | Resources
+      .col-auto
+        = link_to project_resources_path(@project)
+          | View resources&hellip;
 
     ul.list-group.list-group-flush
       - if @project.resources.any?
         = render @project.resources
-
       - else
         .list-group-item.text-center.text-secondary.font-italic
           | There are no resources in this project
   
-  .card.mb-3
-    .card-header
-      .row.justify-content-between.align-items-center
-        .col-auto.font-weight-bold
-          = octicon "comment"
-          | Project chat
-        .col-auto
-          = link_to chats_path
-            = octicon "paper-airplane"
-            | Send chats&hellip;
+  .col-4
+    .card.mb-3
+      .card-header
+        .row.justify-content-between.align-items-center
+          .col-auto.font-weight-bold
+            = octicon "comment"
+            | Project chat
+          .col-auto
+            = link_to project_chats_path(@project)
+              | Send chats&hellip;
 
+      .card-body
+        = render(@project.chats.recent.limit(3))
+
+        - unless @project.chats.any?
+          .text-center.text-secondary.font-italic
+            | There are no chats in this project
+
+        p.text-muted.border-top.px-2.pt-3.mt-4
+          => link_to "The project chat", project_chats_path(@project)
+          | is a place to ask questions, discuss ideas, and bounce ideas 
+          | off eachother. 
+
+  .col-4: .card
+    .card-header: .row.justify-content-between
+      .col-auto.font-weight-bold
+        = octicon "calendar"
+        | Milestones
+      .col-auto
+        = link_to project_milestones_path(@project)
+          | View milestones&hellip;
+    
     .card-body
-      = render(@project.chats.recent.limit(3))
+      = render @project.milestones
 
-      - unless @project.chats.any?
-        .text-center.text-secondary.font-italic
-          | There are no chats in this project
-
-      p.text-muted.border-top.px-2.pt-3.mt-4
-        => link_to "The project chat", chats_path
-        | is a place to ask questions, discuss ideas, and bounce ideas 
-        | off eachother. 
-
+= render "shared/container"
   .card.mt-3
     .card-body
       .card-title Recent project activity

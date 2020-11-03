@@ -1,8 +1,12 @@
 .row.justify-content-between
   .col-auto
-    span.font-weight-bold
-      - if activity.owner and not current_page? students_project_path
-        = link_to activity.owner.display_name + ' ', user_path(activity.owner), class: "text-body"
+    - if activity.owner and not current_page? students_project_path
+      = link_to user_path(activity.owner), class: "text-body"
+        span.font-weight-bold=> activity.owner.display_name
+
+      - if activity.owner.teacher?
+        .badge.badge-primary.mr-1 teacher
+
     == yield
     
   .col-auto.text-secondary

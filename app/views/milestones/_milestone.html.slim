@@ -1,0 +1,15 @@
+.card.mb-3: .card-body: .row.justify-content-between
+  .col-8
+    p.font-weight-bold.h5.mb-1= milestone.title
+
+    == milestone.description
+
+    .mb-1
+
+    - if can? :edit, milestone
+      = link_to edit_milestone_path(milestone), class: "text-muted"
+        = octicon "pencil"
+        | Edit details&hellip;
+
+  .col-4
+    p.mb-1.text-right= milestone.date.strftime("%A, %b %d")

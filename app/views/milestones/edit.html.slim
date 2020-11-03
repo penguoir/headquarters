@@ -1,0 +1,11 @@
+= render "shared/container" do
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path
+    - b.item "Milestones", project_milestones_path(@project)
+    - b.item "Edit '#{@milestone.title}'"
+
+  h1.page-title Edit "#{@milestone.title}" milestone
+
+  = render "form", milestone: @milestone

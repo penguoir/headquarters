@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project: one
+  date: 2020-11-02 18:24:52
+  title: MyString
+
+two:
+  project: two
+  date: 2020-11-02 18:24:52
+  title: MyString

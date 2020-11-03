@@ -1,0 +1,27 @@
+= form_with model: milestone, local: true do |f| 
+  - if milestone.errors.any?
+    .alert.alert-danger
+      h2
+        = pluralize(milestone.errors.count, "error")
+        | prohibited this milestone from being saved:
+
+      ul
+        - milestone.errors.full_messages.each do |message|
+          li= message
+
+  .form-group
+    = f.label :date, "Date"
+    = f.date_field :date, value: Time.now.strftime("%Y-%m-%d"), class: "form-control"
+
+  .form-group
+    = f.label :title, "Title"
+    = f.text_field :title, placeholder: "Type the milestone title here...", class: "form-control"
+
+  .form-group
+    = f.label :description, "Description (optional)"
+    = f.rich_text_area :description, placeholder: "Type the description here..."
+
+  .row.justify-content-end
+    .col-auto
+      = f.submit class: "btn btn-primary"
+

@@ -17,10 +17,11 @@ Rails.application.routes.draw do
 
       get 'students', to: 'projects#students'
 
-      resources :chats
     end
 
-    resources :resources, except: :index
+    resources :chats
+    resources :milestones, except: :show
+    resources :resources
   end
 
   authenticated do

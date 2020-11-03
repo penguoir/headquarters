@@ -33,6 +33,9 @@ class Ability
       can :read, Resource
       # Stduent and teachers can manage their own resources
       can :manage, Resource, user: user
+
+      # Students and teachers can read milestones
+      can :read, Milestone
     end
 
     if user.teacher?
