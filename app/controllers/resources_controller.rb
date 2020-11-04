@@ -6,6 +6,8 @@ class ResourcesController < ApplicationController
 
   def index
     @resources = @project.resources
+
+    redirect_to new_project_resource_path unless @resources.any?
   end
 
   def show

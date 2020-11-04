@@ -22,6 +22,7 @@
   #chats.mt-4
     = render @chats
 
-  p.border-top.p-3.text-center.mt-3
-    => [@project.chats.size - 25, 0].max
-    | other chats aren't shown
+  - if @project.chats.size > 25
+    p.border-top.p-3.text-center.mt-3
+      => [@project.chats.size - 25, 0].max
+      | other chats aren't shown

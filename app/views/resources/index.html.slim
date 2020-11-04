@@ -7,15 +7,13 @@
   - if notice
     .alert.alert-info= notice
 
-  h1.subpage-title.mb-4
-    | Resources of
-    = ' ' + @project.title
+  h1.subpage-title.mb-4 Resources
 
   - unless @resources.any?
     .alert.alert-info No resources
 
   .list-group.mb-3
-    = render @resources
+    = render @resources, no_project: true
 
   = link_to new_project_resource_path do
     .card.bg-light

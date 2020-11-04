@@ -1,0 +1,14 @@
+= link_to project_milestones_path(@project), class: "text-reset text-decoration-none"
+  .card
+    .card-header.font-weight-bold
+      | Milestones
+    
+    .card-body
+      = render @project.milestones
+
+      - unless @project.milestones.any?
+        .row.flex-column.align-items-center
+          = octicon "calendar", width: 32
+          p.p-3.mb-0.text-center
+            |
+              Keep track of when project events are happening

@@ -1,0 +1,13 @@
+= link_to project_chats_path(@project), class: "text-reset text-decoration-none"
+  .card.mb-3
+    .card-header.font-weight-bold
+      | Project chat
+
+    .card-body
+      = render(@project.chats.recent.limit(3))
+
+      - unless @project.chats.any?
+       .row.flex-column.align-items-center
+         = octicon "comment", width: 32
+         p.p-3.mb-0.text-center
+          | Bounce ideas off eachother, share things you've done, and ask questions.

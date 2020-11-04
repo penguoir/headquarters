@@ -1,21 +1,21 @@
 .list-group-item.list-group-item-action
   .row.justify-content-between
-    .col-9
+    .col-8
       p.mb-0= link_to resource.title, resource, class: "font-weight-bold text-body"
       p.mb-0= resource.content.to_plain_text.truncate(100)
 
-      - unless current_page? '/users/*'
+      - unless local_assigns[:no_user]
         p.mb-0.text-muted
           | Uploaded by 
           = link_to resource.user.display_name, resource.user, class: "text-dark"
 
-      - unless controller_name == 'projects' and action_name == 'show'
+      - unless local_assigns[:no_project]
         p.mb-0
           | In project: 
           = link_to resource.project.title, resource.project
 
     .col-auto.text-right
-      p.text-secondary
+      p.text-secondary.mb-0
         = octicon "clock"
         | last updated
         = ' ' + time_ago_in_words(resource.project.updated_at) + ' '

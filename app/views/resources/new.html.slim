@@ -3,7 +3,7 @@
   = breadcrumbs do |b|
     - b.item "Your projects", projects_path
     - b.item @project.title, project_path(@project)
-    - b.item "Resources"
+    - b.item "Resources", project_resources_path(@project)
     - b.item "Add a new resource"
 
   h1.page-title

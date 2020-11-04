@@ -2,6 +2,8 @@ class Project < ApplicationRecord
   include PublicActivity::Model
   tracked :owner => -> (controller, model) { controller.current_user }
 
+  validates_presence_of :title
+
   has_rich_text :brief
   has_many :resources, dependent: :destroy
   has_many :pins, dependent: :destroy

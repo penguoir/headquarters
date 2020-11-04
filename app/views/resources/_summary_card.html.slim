@@ -1,0 +1,18 @@
+= link_to project_resources_path(project), class: "text-reset text-decoration-none"
+  .card.mb-3
+    .card-header.font-weight-bold
+      | Resources
+
+    .card-body
+      .row.flex-column.align-items-center
+        = octicon "bookmark", width: 32
+        p.p-3.mb-0.text-center
+          | Share your work, see what your peers have found, and learn together
+
+      - if project.resources.any?
+        p.pt-3.font-weight-bold.border-top
+          | Recently uploaded resources:
+        ul.list-unstyled
+          - project.resources.limit(3).each do |resource|
+            = link_to resource, class: "text-decoration-none"
+              li= resource.title

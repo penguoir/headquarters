@@ -4,6 +4,10 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all.with_rich_text_brief
+
+    unless @projects.any?
+      redirect_to :new
+    end
   end
 
   def pinned
@@ -38,7 +42,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to @project, notice: 'Project was successfully created.'
     else
-      render :show, status: :created, location: @project
+      render :new
     end
   end
 

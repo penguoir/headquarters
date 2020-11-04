@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: :show
+  resources :users, only: :show # (to get helper functions)
 
   get 'users/edit/parent', to: 'users#edit_parent'
   patch 'users/edit/parent', to: 'users#update_parent'
@@ -11,17 +11,15 @@ Rails.application.routes.draw do
     end
 
     member do
-      # /project/1/pin --> pins#pin
       post 'pin', to: 'pins#pin'
       delete 'pin', to: 'pins#unpin'
 
       get 'students', to: 'projects#students'
-
     end
 
+    resources :resources
     resources :chats
     resources :milestones, except: :show
-    resources :resources
   end
 
   authenticated do

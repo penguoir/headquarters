@@ -1,11 +1,12 @@
 = form_with model: project, local: true do |f| 
   - if project.errors.any?
     .alert.alert-danger
-      h2
-        = pluralize(project.errors.count, "error")
-        | prohibited this project from being saved:
+      p.mb-0
+        |
+          #{pluralize(project.errors.count, "error")} stopped this project from
+          being saved:
 
-      ul
+      ul.mb-0
         - project.errors.full_messages.each do |message|
           li= message
 
@@ -17,10 +18,10 @@
     = f.label :brief, "A brief for the project"
     = f.rich_text_area :brief
 
-  = f.fields_for :pins do |pins_f|
+  = f.fields_for :pins do |pins_form|
     .form-check
-      = pins_f.check_box :pinned, class: "form-check-input"
-      = pins_f.label :pinned, "Add this project to your pinned projects?", class: "form-check-label"
+      = pins_form.check_box :pinned, class: "form-check-input"
+      = pins_form.label :pinned, "Pin this project to your dashboard?", class: "form-check-label"
 
   .row.justify-content-end
     .col-auto

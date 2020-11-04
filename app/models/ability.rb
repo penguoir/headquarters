@@ -26,13 +26,16 @@ class Ability
 
     if user.student? or user.teacher?
       # Students and teachers can read and pin projects
-      can [:read, :pinned], Project
+      can [:read, :students, :pinned], Project
       can :manage, Pin, user: user
 
       # Stduent and teachers can read resources
       can :read, Resource
       # Stduent and teachers can manage their own resources
       can :manage, Resource, user: user
+
+      # Students and teachers can discuss ideas
+      can [:read, :create], Chat
 
       # Students and teachers can read milestones
       can :read, Milestone
