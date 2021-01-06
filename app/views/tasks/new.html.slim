@@ -1,0 +1,10 @@
+= render "shared/container"
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Tasks", tasks_path
+    - b.item "New task"
+
+  h1.page-title New Task
+
+  = render 'form', task: @task

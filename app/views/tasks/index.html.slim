@@ -1,0 +1,15 @@
+= render "shared/container"
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Tasks"
+
+  h1.page-title Tasks
+
+  .card
+    .card-body
+      = render @tasks
+
+
+= link_to 'New Task', new_task_path

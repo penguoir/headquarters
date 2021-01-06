@@ -6,6 +6,7 @@ class Project < ApplicationRecord
   has_many :resources, dependent: :destroy
   has_many :pins, dependent: :destroy
   has_many :chats, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   accepts_nested_attributes_for :pins
 
