@@ -36,3 +36,7 @@ yarn-debug.log*
 .yarn-integrity
 
 tags
+
+# Ignore sqlite database
+/db/*.sqlite3
+/vendor/bundle/
