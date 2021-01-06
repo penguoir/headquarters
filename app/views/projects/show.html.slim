@@ -61,6 +61,7 @@
                 | Edit project details
       .card-body== @project.brief
 
+
   .card.mb-3
     .card-header
       .row.justify-content-between.align-items-center
@@ -101,6 +102,25 @@
         => link_to "The project chat", chats_path
         | is a place to ask questions, discuss ideas, and bounce ideas 
         | off eachother. 
+
+  .card.mb-3
+    .card-header
+      .row.justify-content-between.align-items-center
+        .col.font-weight-bold
+          | Tasks
+
+        .col-auto
+          = link_to new_task_path
+            = octicon "plus"
+            | Add a task
+
+    .card-body
+      = @project.tasks
+
+      hr
+
+      p Everything that needs to get done in the project
+      p= @project.tasks.complete.size
 
   .card.mt-3
     .card-body

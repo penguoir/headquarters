@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get 'students', to: 'projects#students'
 
       resources :chats
+      resources :tasks
     end
 
     resources :resources, except: :index
