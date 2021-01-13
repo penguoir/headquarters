@@ -127,7 +127,7 @@ GEM
       octicons (= 10.1.0)
       rails
     orm_adapter (0.5.0)
-    pg (1.2.3)
+    pandoc-ruby (2.1.4)
     popper_js (1.16.0)
     possessive (1.0.1)
     public_activity (1.6.4)
@@ -253,7 +253,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.2)
   octicons_helper (~> 10.0)
-  pg (>= 0.18, < 2.0)
+  pandoc-ruby (~> 2.1)
   possessive
   public_activity (~> 1.6.4)
   puma (~> 4.1)

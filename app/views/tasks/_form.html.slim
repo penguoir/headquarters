@@ -14,9 +14,18 @@
     = form.text_field :title, class: "form-control", placeholder: "Type the tasks's title in here&hellip;".html_safe
 
   .form-group
+    = form.label :content, "Task description"
+    = form.rich_text_area :content, placeholder: "You can write extra details in here"
+
+  .form-group
     = form.label :user, class: "form-label"
       | Responsible for this task
     = form.select :user_id, User.all.map{ |u| [u.email, u.id] }, {}, { class: "custom-select", value: current_user.id }
+    p.form-text.text-muted
+      |
+        This does not mean that they are responsible for doing the whole
+        assignment! They can ask others for help and guidance. But, if this
+        task isn't done by the deadline, they are accountable.
 
   .form-inline.mb-3: .container: .row
     = form.label :due, class: "form-label"
@@ -24,3 +33,20 @@
     = form.datetime_select :due, class: "custom-select"
 
   = form.submit class: "btn btn-primary"
+
+  .card.mt-4: .card-body
+    markdown:
+
+      **Here are some things that make a task better**
+
+      * Start with a verb
+      * Keep the title short
+      * Specific and clear
+
+      Starting the name of your task with an action word (like "Write", "Call", "Brainstorm") helps your brain shift into "doing mode".
+
+      If a task is longer than a few words, split it into multiple tasks.
+
+      Writing out the full task name means you don't have to remember what it
+      means later on. Good: "Create charts from data in Excel" Bad: "spreadsheet"
+

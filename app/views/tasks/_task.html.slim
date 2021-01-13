@@ -3,6 +3,10 @@
     .form-check
       input.form-check-input type="checkbox" id="#{task.id}-done" checked=task.complete? onclick="alert('Please use the button below to change the status of this task'); return false"
       label.h5.form-check-label for="#{task.id}-done"
+        - if task.content.present?
+          span data-toggle="tooltip" title="This task has more details in its description."
+            = octicon "file"
+
         - if current_page?(controller: 'tasks', action: 'show')
           = task.title
         - else 
@@ -13,7 +17,7 @@
         p.mb-0.text-muted
           = octicon "person"
           | In charge:
-          b<= task.user.display_name
+          =< link_to task.user.display_name, task.user, class: "text-dark text-decoration-none"
 
       - if task.due.present?
         p.mb-0.text-muted
