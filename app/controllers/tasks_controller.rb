@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete, :incomplete]
 
   # GET /tasks
   # GET /tasks.json
@@ -11,6 +11,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    @project = @task.project
   end
 
   # GET /tasks/new
@@ -29,26 +30,33 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.project ||= Project.find(params[:id])
 
-    respond_to do |format|
-      if @task.save
-        redirect_to @task, notice: 'Task was successfully created.'
-      else
-        render :new 
-      end
+    if @task.save
+      redirect_to @task, notice: 'Task was successfully created.'
+    else
+      render :new 
     end
   end
 
   # PATCH/PUT /tasks/1
-  # PATCH/PUT /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    if @task.update(task_params)
+      redirect_to @task, notice: 'Task was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  # POST /tasks/1/complete
+  def complete
+    if @task.update(status: :complete)
+      redirect_to tasks_path(@task.project), notice: 'Task marked as completed'
+    end
+  end
+
+  # POST /tasks/1/complete
+  def incomplete
+    if @task.update(status: :incomplete)
+      redirect_to tasks_path(@task.project), notice: 'Task marked as incompleted'
     end
   end
 
@@ -69,6 +77,7 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:project_id, :title, :user_id)
+      puts params
+      params.require(:task).permit(:project_id, :title, :user_id, :due)
     end
 end

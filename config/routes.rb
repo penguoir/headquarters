@@ -18,7 +18,10 @@ Rails.application.routes.draw do
       get 'students', to: 'projects#students'
 
       resources :chats
-      resources :tasks
+      resources :tasks do
+        post :complete, on: :member
+        post :incomplete, on: :member
+      end
     end
 
     resources :resources, except: :index

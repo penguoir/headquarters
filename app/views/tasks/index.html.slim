@@ -5,11 +5,12 @@
     - b.item @project.title, project_path(@project)
     - b.item "Tasks"
 
-  h1.page-title Tasks
 
-  .card
-    .card-body
-      = render @tasks
+  h1.page-title Tasks for #{@project.title}
 
+  .d-flex.justify-content-center.w-100
+    = link_to new_task_path, class: "btn btn-success btn-lg mb-2 text-align-center"
+      = octicon "plus"
+      | Add a new task
 
-= link_to 'New Task', new_task_path
+  = render @tasks

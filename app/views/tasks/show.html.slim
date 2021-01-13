@@ -1,0 +1,16 @@
+= render "shared/container"
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Tasks", tasks_path(@project)
+    - b.item @task.title
+
+  = render @task
+
+  p.text-muted
+    | Task created at: #{@task.created_at}
+    br
+    | Task last updated at: #{@task.updated_at}
+
+    =console
+

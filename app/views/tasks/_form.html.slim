@@ -18,14 +18,9 @@
       | Responsible for this task
     = form.select :user_id, User.all.map{ |u| [u.email, u.id] }, {}, { class: "custom-select", value: current_user.id }
 
-  .form-group
+  .form-inline.mb-3: .container: .row
     = form.label :due, class: "form-label"
       | Due date
-    = form.date_field :due, {}, class: "form-control"
-
-  .form-group
-    = form.label :user, class: "form-label"
-      | Responsible for this task
-    = form.select :user_id, User.all.map{ |u| [u.email, u.id] }, {}, { class: "custom-select", value: current_user.id }
+    = form.datetime_select :due, class: "custom-select"
 
   = form.submit class: "btn btn-primary"
