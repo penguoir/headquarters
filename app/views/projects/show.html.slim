@@ -1,7 +1,4 @@
 = render "shared/container" do
-  - if notice
-    .alert.alert-success= notice
-
   = breadcrumbs do |b|
     - b.item "Your projects", projects_path
     - b.item @project.title
@@ -110,6 +107,7 @@
     .card-header
       .row.justify-content-between.align-items-center
         .col.font-weight-bold
+          = octicon "check"
           | Tasks
 
         .col-auto
@@ -118,12 +116,25 @@
             | Add a task
 
     .card-body
-      = render @project.tasks
+      - if @project.tasks.any?
+        = render @project.tasks.limit(3), inline: true
 
-      hr
+        - if @project.tasks.size > 3
+          = link_to tasks_path, class: "text-dark text-decoration-none"
+            .card.bg-light: .card-body.d-flex.justify-content-center
+              | #{@project.tasks.size - 3} more #{'task'.pluralize(@project.tasks.size - 3)}
 
-      p Everything that needs to get done in the project
-      p= @project.tasks.complete.size
+        hr
+        p #{@project.tasks.complete.size}/#{@project.tasks.size} tasks are done.
+        = link_to "View all tasks &rarr;".html_safe, tasks_path
+      - else
+        .text-center
+          p.mb-1
+            |
+              Here you can organise everything you need to do to get the
+              project done. Start by adding a new task
+
+          = link_to "Add a task", new_task_path
 
 
   .card.mt-3

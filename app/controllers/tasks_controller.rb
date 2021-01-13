@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.all.where(project: params[:id])
     @project = Project.find(params[:id])
   end
 
@@ -63,11 +63,9 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
+    path = project_path(@task.project)
     @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to path, notice: 'Task was successfully destroyed.'
   end
 
   private

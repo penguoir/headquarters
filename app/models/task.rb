@@ -1,4 +1,7 @@
 class Task < ApplicationRecord
+  include PublicActivity::Model
+  tracked owner: :user, recipient: :project
+
   belongs_to :project
   belongs_to :user
 

@@ -1,30 +1,31 @@
-.card.mb-3: .card-body
-  .form-check
-    input.form-check-input type="checkbox" id="#{task.id}-done" checked=task.complete? onclick="alert('Please use the button below to change the status of this task'); return false"
-    label.h5.form-check-label for="#{task.id}-done"
-      - if current_page?(controller: 'tasks', action: 'show')
-        = task.title
-      - else 
-        = link_to task.title, task
+.card.mb-3
+  div class=(local_assigns[:inline] ? "card-body c-inline-card" : "card-body")
+    .form-check
+      input.form-check-input type="checkbox" id="#{task.id}-done" checked=task.complete? onclick="alert('Please use the button below to change the status of this task'); return false"
+      label.h5.form-check-label for="#{task.id}-done"
+        - if current_page?(controller: 'tasks', action: 'show')
+          = task.title
+        - else 
+          = link_to task.title, task
 
-  - if task.user
-    p.mb-0.text-muted
-      = octicon "person"
-      | In charge:
-      b<= task.user.display_name
+    .c-inline-card-props
+      - if task.user.present?
+        p.mb-0.text-muted
+          = octicon "person"
+          | In charge:
+          b<= task.user.display_name
 
-  - if task.due?
-    p.mb-0.text-muted
-      = octicon "clock"
-      | Due in #{time_ago_in_words(task.due)} 
+      - if task.due.present?
+        p.mb-0.text-muted
+          = octicon "clock"
+          | Due in #{time_ago_in_words(task.due)} 
 
-  - if task.incomplete? 
-    = button_to [:complete, task], class: "btn btn-link p-0"
-      = octicon "check"
-      | Mark as done
-  - else
-    = button_to [:incomplete, task], class: "btn btn-link text-danger p-0"
-      = octicon "x"
-      | Mark as not done
-
-  / code: pre=task.inspect
+      - unless local_assigns[:inline] # only show if not inline
+        - if task.incomplete? 
+          = button_to [:complete, task], class: "btn btn-link p-0"
+            = octicon "check"
+            | Mark as done
+        - else
+          = button_to [:incomplete, task], class: "btn btn-link text-danger p-0"
+            = octicon "x"
+            | Mark as not done

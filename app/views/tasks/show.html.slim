@@ -7,10 +7,18 @@
 
   = render @task
 
+  = link_to edit_task_path(@task), class: "btn btn-primary icon-btn btn-icon mb-2"
+    = octicon "pencil"
+    | Edit this task
+
   p.text-muted
     | Task created at: #{@task.created_at}
     br
     | Task last updated at: #{@task.updated_at}
 
-    =console
+  = button_to @task, method: 'delete', class: "btn text-danger btn-link px-0", data: { confirm: "Are you sure you want to delete this task?" }
+    | Permenantly delete task&hellip;
+
+  p.text-muted
+    | Permenantly deleting tasks will show up on your profile.
 
