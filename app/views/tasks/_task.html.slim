@@ -1,7 +1,13 @@
 .card.mb-3
   div class=(local_assigns[:inline] ? "card-body c-inline-card" : "card-body")
     .form-check
-      input.form-check-input type="checkbox" id="#{task.id}-done" checked=task.complete? onclick="alert('Please use the button below to change the status of this task'); return false"
+      input.form-check-input(
+        type="checkbox"
+        id="#{task.id}-done"
+        checked=task.complete?
+        onclick="alert('Please use the button below to change the status of this task'); return false"
+      )
+
       label.h5.form-check-label for="#{task.id}-done"
         - if task.content.present?
           span data-toggle="tooltip" title="This task has more details in its description."
@@ -13,7 +19,7 @@
           = link_to task.title, task
 
     .c-inline-card-props
-      - if task.user.present?
+      - if task.user.present? && !current_page?(action: 'show', controller: 'users')
         p.mb-0.text-muted
           = octicon "person"
           | In charge:
@@ -24,7 +30,8 @@
           = octicon "clock"
           | Due in #{time_ago_in_words(task.due)} 
 
-      - unless local_assigns[:inline] # only show if not inline
+      / only show if not inline and not on user's page
+      - unless local_assigns[:inline] || current_page?(action: 'show', controller: 'users')
         - if task.incomplete? 
           = button_to [:complete, task], class: "btn btn-link p-0"
             = octicon "check"
@@ -33,3 +40,4 @@
           = button_to [:incomplete, task], class: "btn btn-link text-danger p-0"
             = octicon "x"
             | Mark as not done
+

@@ -28,6 +28,12 @@
     = render @resources
 
   h2.subpage-title.mb-4.mt-5
+    | Tasks assigned to #{@user.display_name} in the last week
+
+  .list-group
+    = render @tasks
+
+  h2.subpage-title.mb-4.mt-5
     | This week's activity
 
   = render_activities @activities, layout: :activity

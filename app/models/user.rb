@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :resources
   has_many :pins
+  has_many :tasks
 
   def display_name
     self.email.split('@', 2).first.capitalize

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
       .where(owner: @user)
       .where('created_at > ?', 7.days.ago)
     @resources = @user.resources.where('created_at > ?', 7.days.ago)
+    @tasks = @user.tasks.where('created_at > ?', 7.days.ago)
   end
 
   def edit_parent
