@@ -1,11 +1,48 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+prototype:
+  project: museum
+  title: Create a working prototype
+  due: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2021-01-11 13:09:00.000000000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  status: complete
+  user: ori
 
-one:
-  project: one
-  title: MyString
-  user: one
+another:
+  project: museum
+  title: Another task
+  due: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2021-01-13 11:38:00.000000000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  status: complete
+  user: leo
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2021-01-11 12:50:41.366218000 Z
+    zone: *2
+    time: *3
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &4 2021-01-13 11:38:32.183154000 Z
+    zone: *2
+    time: *4
 
-two:
-  project: two
-  title: MyString
-  user: two
+fix_everything:
+  project: museum
+  title: Fix all world problems
+  due: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2021-01-13 10:48:00.000000000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  status: incomplete
+  user: raj
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2021-01-13 10:48:20.753032000 Z
+    zone: *2
+    time: *3
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &4 2021-01-13 10:48:20.753032000 Z
+    zone: *2
+    time: *4

@@ -10,6 +10,7 @@ class Project < ApplicationRecord
 
   accepts_nested_attributes_for :pins
 
+  # Returns all projects pinned by a user
   def self.pinned_by(user)
     joins(:pins).where(pins: { user: user, pinned: true })
   end

@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  project: one
+ori_pins_museum:
+  user: ori
+  project: museum
 
-two:
-  user: two
-  project: two
+leo_pins_museum:
+  user: leo
+  project: museum

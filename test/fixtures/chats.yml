@@ -1,13 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  body: MyText
-  user: one
-  project: one
+hello:
+  body: Hello
+  user: ori
+  project: museum
   is_deleted: false
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2021-01-15 14:25:29.101122000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2021-01-15 14:25:29.101122000 Z
+    zone: *2
+    time: *3
 
-two:
-  body: MyText
-  user: two
-  project: two
-  is_deleted: false
+bad_chat:
+  body: You rapscallion!
+  user: ori
+  project: museum
+  is_deleted: true
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &1 2021-01-29 14:36:34.695117000 Z
+    zone: &2 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: *1
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: &3 2021-01-29 14:36:34.695117000 Z
+    zone: *2
+    time: *3

@@ -4,5 +4,7 @@ class Chat < ApplicationRecord
 
   validates_presence_of :body
 
-  scope :recent, -> { order(created_at: :desc) }
+  scope :recent, -> {
+    order(created_at: :desc).where.not(is_deleted: true)
+  }
 end
