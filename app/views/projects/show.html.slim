@@ -30,10 +30,11 @@
               = octicon "pin"
               | Pin the project
 
-          p.text-muted.px-4.py-3.mb-0
-            | Last edit was made
-            = ' ' + time_ago_in_words(@project.last_activity.created_at) + ' '
-            | ago.
+          - if @project.last_activity
+            p.text-muted.px-4.py-3.mb-0
+              | Last edit was made
+              = ' ' + time_ago_in_words(@project.last_activity.created_at) + ' '
+              | ago.
 
   h1.page-title= @project.title
 

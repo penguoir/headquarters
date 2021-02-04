@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class ProjectsControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    @project = projects(:one)
+    @project = projects(:museum)
+    sign_in users(:raj)
   end
 
   test "should get index" do
@@ -17,7 +20,12 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create project" do
     assert_difference('Project.count') do
-      post projects_url, params: { project: { title: @project.title } }
+      post projects_url, params: {
+        project: {
+          title: "Project",
+          pins_attributes: { "0": { pinned: true } }
+        }
+      }
     end
 
     assert_redirected_to project_url(Project.last)
@@ -34,7 +42,12 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update project" do
-    patch project_url(@project), params: { project: { title: @project.title } }
+    patch project_url(@project), params: {
+      project: {
+        title: "Project",
+        pins_attributes: { "0": { pinned: true } }
+      }
+    }
     assert_redirected_to project_url(@project)
   end
 
