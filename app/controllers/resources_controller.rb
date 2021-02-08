@@ -4,6 +4,10 @@ class ResourcesController < ApplicationController
 
   load_and_authorize_resource
 
+  def index
+    @resources = Resource.all
+  end
+
   def show
   end
 

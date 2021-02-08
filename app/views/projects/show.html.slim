@@ -64,15 +64,15 @@
     .card-header
       .row.justify-content-between.align-items-center
         .col.font-weight-bold
+          = octicon "file"
           | Resources
         .col-auto
-          = link_to new_project_resource_path(@project), class: "text-primary" do
-            = octicon "plus"
-            | Add a resource&hellip;
+          = link_to project_resources_path(@project), class: "text-primary" do
+            | View all resources&hellip;
 
     ul.list-group.list-group-flush
       - if @project.resources.any?
-        = render @project.resources
+        = render @project.resources.limit(5)
 
       - else
         .list-group-item.text-center.text-secondary.font-italic
@@ -83,7 +83,7 @@
       .row.justify-content-between.align-items-center
         .col-auto.font-weight-bold
           = octicon "comment"
-          | Project chat
+          | Chat
         .col-auto
           = link_to chats_path
             = octicon "paper-airplane"
@@ -127,6 +127,8 @@
 
         hr
         p #{@project.tasks.complete.size}/#{@project.tasks.size} tasks are done.
+        progress.w-100 value=@project.tasks.complete.size max=@project.tasks.size
+
         = link_to "View all tasks &rarr;".html_safe, tasks_path
       - else
         .text-center

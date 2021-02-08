@@ -1,0 +1,16 @@
+= render "shared/container"
+
+  = breadcrumbs do |b|
+    - b.item "Your projects", projects_path
+    - b.item @project.title, project_path(@project)
+    - b.item "Resources"
+
+
+  h1.page-title Resources for #{@project.title}
+
+  .d-flex.justify-content-center.w-100
+    = link_to new_project_resource_path, class: "btn btn-success btn-lg mb-2 text-align-center"
+      = octicon "plus"
+      | Add a new resource
+
+  = render @resources

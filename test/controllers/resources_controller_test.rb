@@ -1,23 +1,26 @@
 require 'test_helper'
 
 class ResourcesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    @resource = resources(:one)
+    @resource = resources(:british_museum_site)
+    sign_in users(:ori)
   end
 
   test "should get index" do
-    get resources_url
+    get project_resources_url(@resource.project)
     assert_response :success
   end
 
   test "should get new" do
-    get new_resource_url
+    get new_project_resource_url(@resource.project)
     assert_response :success
   end
 
   test "should create resource" do
     assert_difference('Resource.count') do
-      post resources_url, params: { resource: { project_id: @resource.project_id, title: @resource.title, user_id: @resource.user_id } }
+      post project_resources_url(@resource.project), params: { resource: { project_id: @resource.project_id, title: @resource.title, user_id: @resource.user_id } }
     end
 
     assert_redirected_to resource_url(Resource.last)
@@ -43,6 +46,6 @@ class ResourcesControllerTest < ActionDispatch::IntegrationTest
       delete resource_url(@resource)
     end
 
-    assert_redirected_to resources_url
+    assert_redirected_to project_url(@resource.project)
   end
 end

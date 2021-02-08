@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :resources, except: :index
+    resources :resources
   end
 
   authenticated do

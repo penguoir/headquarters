@@ -4,12 +4,12 @@
       p.mb-0= link_to resource.title, resource, class: "font-weight-bold text-body"
       p.mb-0= resource.content.to_plain_text.truncate(100)
 
-      - unless current_page? user_path
+      - unless params[:controller] == 'users' && params[:action] == 'show'
         p.mb-0.text-muted
           | Uploaded by 
           = link_to resource.user.display_name, resource.user, class: "text-dark"
 
-      - unless current_page? project_path
+      - unless params[:controller] == 'projects'
         p.mb-0
           | In project: 
           = link_to resource.project.title, resource.project
