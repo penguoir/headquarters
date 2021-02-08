@@ -13,6 +13,11 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should show students" do
+    get students_project_url(projects(:museum))
+    assert_response :success
+  end
+
   test "should get new" do
     get new_project_url
     assert_response :success
